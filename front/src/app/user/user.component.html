@@ -1,0 +1,47 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header" routerLinkActive="active">
+
+                        <h4 class="title">Les employees</h4>
+
+                        <a routerLink="/add">
+                            <h4>
+                                <i class="pe-7s-add-user"></i>
+                                Ajouter un nouveau employee
+
+                            </h4>
+                        </a>
+
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th> Employee</th>
+                                <th> Id carte de pointage</th>
+                                <th> Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody *ngFor=" let employee of employees">
+                            <tr>
+                                <td> {{employee.nomEmploye}}</td>
+                                <td> {{employee.idCard}}</td>
+                                <td>
+                                    <div class="center" style="">
+                                        <button type="submit" class="btn btn-success btn-fill pull-right" [routerLink]="'/update/' + employee.idEmploye">Modifier</button>
+                                        <button type="submit" (click)="DeleteEmploye(employee)" class="btn btn-danger btn-fill pull-right">Supprimer</button>
+                                    </div>
+                                  </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
