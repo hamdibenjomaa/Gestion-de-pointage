@@ -14,7 +14,11 @@
                                 <th > Heure de pointage  </th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody *ngFor=" let p of pointages">
+                            <tr>
+                                <td> {{p.employe.nomEmploye}}</td>
+                                <td> {{p.datePointage}}</td>
+                            </tr>
                             </tbody>
                         </table>
 

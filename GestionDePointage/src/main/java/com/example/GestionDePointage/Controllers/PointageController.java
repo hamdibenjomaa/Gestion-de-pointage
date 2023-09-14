@@ -1,15 +1,17 @@
 package com.example.GestionDePointage.Controllers;
 
 
-import com.example.GestionDePointage.Repositories.PointageRepo;
+
 import com.example.GestionDePointage.Services.EmployeService;
 import com.example.GestionDePointage.Services.PointageService;
 import com.example.GestionDePointage.entities.pointage;
-import com.example.GestionDePointage.Controllers.EmployeController;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletContext;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -22,18 +24,19 @@ public class PointageController {
     EmployeService ec ;
 
     @GetMapping({"/AllPointages"})
-    public List<pointage> GetAllv(){
+    public List<pointage> GetAllPointages(){
         return PointageSer.getallpointages();
     }
 
     @PostMapping("/AddPointage/{idc}")
     @ResponseBody
     public pointage savePointage(@PathVariable("idc") int idc ,@RequestBody pointage Pointage) {
-        if (ec.getEmployeByIdCard(idc) != null){
+        if (ec.getEmployeByIdCard(idc) != null) {
+            LocalDateTime dateCourante = LocalDateTime.now(); // Obtenir la date et l'heure courantes
+            Pointage.setDatePointage(dateCourante);
             return PointageSer.savepointage(Pointage);
-        }
-        else{
-            return null ;
+        } else {
+            return null;
         }
     }
 

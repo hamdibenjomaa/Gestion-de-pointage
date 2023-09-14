@@ -12,22 +12,22 @@ import java.util.List;
 public class PointageService {
 
     @Autowired
-    PointageRepo PointageRepo ;
+    PointageRepo pointageRepoo ;
 
 
     public List<pointage> getallpointages(){
-        return PointageRepo.findAll();
+        return pointageRepoo.findAll();
     }
 
     public pointage getpointageById(int id) {
-        return PointageRepo.findById(id).orElse(null) ;
+        return pointageRepoo.findById(id).orElse(null) ;
     }
 
     public pointage savepointage(pointage p) {
-        return PointageRepo.save(p);
+        return pointageRepoo.save(p);
     }
 
     public void deletepointage(int id) {
-        PointageRepo.deleteById(id);
+        pointageRepoo.deleteById(id);
     }
 }
