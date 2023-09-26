@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../shared/auth.service";
+import {FormControl, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -7,33 +9,28 @@ import {AuthService} from "../shared/auth.service";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  email : string = '';
-  password : string = '';
 
-  constructor(private auth : AuthService) { }
+
+  LoginForm = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl('')
+
+
+  });
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  login() {
 
-    if(this.email == '') {
-      alert('Please enter email');
-      return;
+  get f() { return this.LoginForm.controls; }submit(){
+    // @ts-ignore
+    if (this.f.email.value== "admin" && this.f.password.value== "admin"){
+      this.router.navigateByUrl('dashboard');
+    }else{
+      this.router.navigateByUrl('/login');
+      alert("verifier votre email ou mot de passe")
     }
-
-    if(this.password == '') {
-      alert('Please enter password');
-      return;
-    }
-
-    this.auth.login(this.email,this.password);
-
-    this.email = '';
-    this.password = '';
-
   }
-
-
-
 }

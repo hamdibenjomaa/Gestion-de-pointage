@@ -4,6 +4,7 @@ package com.example.GestionDePointage.Controllers;
 
 import com.example.GestionDePointage.Services.EmployeService;
 import com.example.GestionDePointage.Services.PointageService;
+import com.example.GestionDePointage.entities.Employe;
 import com.example.GestionDePointage.entities.pointage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class PointageController {
     @ResponseBody
     public pointage savePointage(@PathVariable("idc") int idc ,@RequestBody pointage Pointage) {
         if (ec.getEmployeByIdCard(idc) != null) {
+            Employe e =ec.getEmployeByIdCard(idc);
+            Pointage.setEmploye(e);
             LocalDateTime dateCourante = LocalDateTime.now(); // Obtenir la date et l'heure courantes
             Pointage.setDatePointage(dateCourante);
             return PointageSer.savepointage(Pointage);
